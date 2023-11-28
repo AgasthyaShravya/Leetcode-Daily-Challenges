@@ -1,0 +1,28 @@
+class Solution {
+    public int numberOfWays(String corridor) {
+        // Define the modulo constant
+        final int k = 1_000_000_007;
+        
+        // Initialize the answer variable to 1
+        long ans = 1;
+        // Initialize variables to keep track of the last plant position and the count of seats
+        int p = -1;
+        int c = 0;
+
+        // Iterate through the corridor
+        for (int i = 0; i < corridor.length(); ++i) {
+            // Check if the current position has a seat ('S')
+            if (corridor.charAt(i) == 'S') {
+                // If there are more than 2 consecutive seats and the count is odd
+                if (++c > 2 && c % 2 == 1)
+                    // Update the answer by multiplying with the distance between the current and previous plant
+                    ans = ans * (i - p) % k;
+                // Update the last plant position
+                p = i;
+            }
+        }
+
+        // Check if there is more than one seat and the count is even
+        return c > 1 && c % 2 == 0 ? (int) ans : 0;
+    }
+}
