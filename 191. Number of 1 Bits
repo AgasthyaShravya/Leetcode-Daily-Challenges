@@ -1,0 +1,17 @@
+public class Solution {
+    // Function to calculate Hamming weight (number of '1' bits) of an integer
+    public int hammingWeight(int n) {
+        // Initialize a counter to keep track of the number of '1' bits
+        int c = 0;
+        // Loop until the binary representation of the integer becomes 0
+        while (n != 0) {
+            // Increment the counter for each '1' bit encountered
+            c++;
+            // Clear the least significant '1' bit by performing n = n & (n - 1)
+            // This operation flips the rightmost '1' bit to '0' and leaves all other bits unchanged
+            n = n & (n - 1);
+        }
+        // Return the final count of '1' bits
+        return c;
+    }
+}
