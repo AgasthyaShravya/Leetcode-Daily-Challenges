@@ -1,0 +1,34 @@
+class Solution {
+    public int countCharacters(String[] words, String chars) {
+        // Initialize the variable to store the result
+        int ans = 0;
+
+        // Initialize an array to count the occurrences of each character in 'chars'
+        int[] count = new int[26];
+
+        // Count the occurrences of each character in 'chars'
+        for (final char c : chars.toCharArray())
+            ++count[c - 'a'];
+
+        // Iterate through each word in the array 'words'
+        for (final String word : words) {
+            // Create a copy of the 'count' array for each word
+            int[] tempCount = count.clone();
+
+            // Iterate through each character in the current word
+            for (final char c : word.toCharArray())
+                // Decrement the count for the current character, and check if it becomes negative
+                if (--tempCount[c - 'a'] < 0) {
+                    // If the count becomes negative, subtract the length of the word from the result and break
+                    ans -= word.length();
+                    break;
+                }
+
+            // If all characters in the word are available, add the length of the word to the result
+            ans += word.length();
+        }
+
+        // Return the final result
+        return ans;
+    }
+}
