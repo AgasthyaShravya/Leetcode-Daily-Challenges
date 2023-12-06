@@ -1,0 +1,9 @@
+class Solution {
+    public int totalMoney(int n) {
+        int c = n / 7;
+        int r = n % 7;
+        int sum = (28 + (28 + 7 * (c - 1))) * c / 2;
+        int sum1 = ((c * 2) + r + 1) * r / 2;
+        return sum + sum1;
+    }
+}
