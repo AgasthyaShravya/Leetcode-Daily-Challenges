@@ -1,0 +1,26 @@
+class Solution {
+    public String shortestPalindrome(String s) {
+        if (s == null || s.length() == 0) return s;        
+        String rev = new StringBuilder(s).reverse().toString();
+        String combined = s + "#" + rev;
+        int[] kmp = computeKMPTable(combined);
+        int longestPalindromePrefixLength = kmp[kmp.length - 1];
+        String toAdd = rev.substring(0, s.length() - longestPalindromePrefixLength);
+        return toAdd + s;
+    }
+    private int[] computeKMPTable(String str) {
+        int n = str.length();
+        int[] kmp = new int[n];
+        int j = 0;         
+        for (int i = 1; i < n; i++) {
+            while (j > 0 && str.charAt(i) != str.charAt(j)) {
+                j = kmp[j - 1];
+            }
+            if (str.charAt(i) == str.charAt(j)) {
+                j++;
+            }
+            kmp[i] = j;
+        }        
+        return kmp;
+    }
+}
